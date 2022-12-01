@@ -2,8 +2,7 @@
 
 https://adventofcode.com/2022
 
-
 ## Day 1
 
-- Python version
-- PowerShell version
+- [Python version](day01/calorie-counting.py)
+- [PowerShell version](day01/Get-CaloriesFromElvesBackpack.ps1)
