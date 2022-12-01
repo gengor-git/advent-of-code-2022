@@ -15,8 +15,6 @@ with open(input_file, "r") as input:
             elves_backpack.append(0)
     print("We've got {0} elves.".format(len(elves_backpack)))
 
-    max_value = None
-
     elves_backpack.sort(reverse=True)
     top1 = elves_backpack[0]
     top2 = elves_backpack[1]
