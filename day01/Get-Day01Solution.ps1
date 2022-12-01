@@ -13,5 +13,5 @@ foreach ($Fruit in $InputFile) {
     }
 }
 
-$ElvesBackpack | Sort-Object -Descending | Select-Object -First 3
+$ElvesBackpack | Sort-Object -Descending | Measure-Object -Maximum
 $ElvesBackpack | Sort-Object -Descending | Select-Object -First 3 | Measure-Object -Sum
