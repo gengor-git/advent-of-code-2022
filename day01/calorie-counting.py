@@ -1,5 +1,3 @@
-import os
-
 input_file = "day01/input.txt"
 
 elves_backpack = [0]
@@ -10,6 +8,8 @@ with open(input_file, "r") as input:
             fruit = int(entry)
             elves_backpack[-1] = elves_backpack[-1] + fruit
         except ValueError:
+            # This means the was not fruit but an empty line.
+            # So we start a new elf's backpack with 0 fruit in it.
             elves_backpack.append(0)
     print("We've got {0} elves.".format(len(elves_backpack)))
 
