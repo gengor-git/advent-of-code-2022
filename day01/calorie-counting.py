@@ -9,7 +9,7 @@ with open(input_file, "r") as input:
         try:
             fruit = int(entry)
             elves_backpack[-1] = elves_backpack[-1] + fruit
-        except:
+        except ValueError:
             elves_backpack.append(0)
     print("We've got {0} elves.".format(len(elves_backpack)))
 
