@@ -2,15 +2,14 @@ $InputFile = Get-Content -Path input.txt
 
 $ElvesBackpack = @(0)
 
-foreach ($Entry in $InputFile) {
-    if ($Entry -eq "") {
-        # new elf starting
+foreach ($Fruit in $InputFile) {
+    if ($Fruit -eq "") {
+        # new elf starting with an empty rucksack
         $ElvesBackpack += 0
-
     }
     else {
-        # add to last elves backpack
-        $ElvesBackpack[-1] = $ElvesBackpack[-1] + $Entry
+        # add fruit to last elves backpack
+        $ElvesBackpack[-1] = $ElvesBackpack[-1] + $Fruit
     }
 }
 
