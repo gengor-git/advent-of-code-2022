@@ -1,8 +1,6 @@
 import os
-from re import I
 
 input_file = "day01/input.txt"
-
 
 elves_backpack = [0]
 
