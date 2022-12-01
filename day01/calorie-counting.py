@@ -19,5 +19,5 @@ with open(input_file, "r") as input:
     top1 = elves_backpack[0]
     top2 = elves_backpack[1]
     top3 = elves_backpack[2]
-    print('Maximum calories with one elf are:', top1)
+    print("Maximum calories with one elf are: {0}".format(top1))
     print("Calories with the top 3 are: {0}".format(top1 + top2 + top3))
