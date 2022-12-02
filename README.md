@@ -11,3 +11,4 @@ https://adventofcode.com/2022
 ## Day 2
 
 - [Python version](day02/rock-paper-scissors.py)
+- [PowerShell version](day02/New-RockPaperScissorsGame.ps1)
