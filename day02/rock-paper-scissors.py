@@ -2,7 +2,6 @@ input_file = "day02/input.txt"
 
 
 def play_by_rules(rules):
-
     score = 0
     with open(input_file, "r") as strategy_guide:
         for round in strategy_guide:
