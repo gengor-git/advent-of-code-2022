@@ -12,7 +12,13 @@ $Results = [PSCustomObject]@{
     LOSE = 0
 }
 
-function Resolve-Sign($LetterCode) {
+function Resolve-Sign {
+    [CmdletBinding()]
+    param (
+        [Parameter()]
+        [String]
+        $LetterCode
+    )
     # Write-Warning "Resoving: $LetterCode"
     switch ($LetterCode) {
         'A' { return $Signs.ROCK }
