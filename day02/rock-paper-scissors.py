@@ -1,8 +1,18 @@
 input_file = "day02/input.txt"
 
 
-def part1():
-    rules = {
+def play_by_rules(rules):
+
+    score = 0
+    with open(input_file, "r") as strategy_guide:
+        for round in strategy_guide:
+            this_score = rules[round]
+            score += this_score
+    return score
+
+
+if __name__ == "__main__":
+    rules_part_1 = {
         'A X\n': 4,
         'A Y\n': 8,
         'A Z\n': 3,
@@ -13,17 +23,7 @@ def part1():
         'C Y\n': 2,
         'C Z\n': 6
     }
-
-    score = 0
-    with open(input_file, "r") as strategy_guide:
-        for round in strategy_guide:
-            this_score = rules[round]
-            score += this_score
-        print(score)
-
-
-def part2():
-    rules = {
+    rules_part_2 = {
         'A X\n': 3,
         'A Y\n': 4,
         'A Z\n': 8,
@@ -34,15 +34,5 @@ def part2():
         'C Y\n': 6,
         'C Z\n': 7
     }
-
-    score = 0
-    with open(input_file, "r") as strategy_guide:
-        for round in strategy_guide:
-            this_score = rules[round]
-            score += this_score
-        print(score)
-
-
-if __name__ == "__main__":
-    part1()
-    part2()
+    print(play_by_rules(rules_part_1))
+    print(play_by_rules(rules_part_2))
