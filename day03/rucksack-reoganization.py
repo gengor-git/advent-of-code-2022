@@ -71,13 +71,8 @@ def find_double_items():
             if len(compartment1) != len(compartment2):
                 print("ERROR")
                 break;
-
-            already_found = ""
-            for item in compartment1:
-                if compartment2.count(item) > 0 and item != already_found:
-                    already_found = item
-                    priority_values += priorities[item]
-
+            dublicate = set(compartment1) & set(compartment2)
+            priority_values += get_prio_by_letter(dublicate.pop())
         print(priority_values)
 
 def find_badges():
@@ -89,5 +84,5 @@ def find_badges():
         print(result)
 
 if __name__ == "__main__":
-    # find_double_items()
-    find_badges()
+    find_double_items()
+    #find_badges()
