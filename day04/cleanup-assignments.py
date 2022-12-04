@@ -13,13 +13,34 @@ def find_fully_contained():
             # range1 = list(range(int(val1[0]), int(val1[1])))
             # range2 = list(range(int(val2[0]), int(val2[1])))
 
-            if compare(val1, val2):
+            if is_full_overlap(val1, val2):
                 counter += 1
 
     return counter
 
+def find_overlap():
+    data = open(input_file).read().split("\n")
+    counter = 0
+    for entry in data:
+        if entry != "":
+            pair = list(entry.split(","))
+            val1 = list(map(int, pair[0].split("-")))
+            val2 = list(map(int, pair[1].split("-")))
 
-def compare(val1, val2):
+            if is_general_overlap(val1, val2):
+                counter += 1
+
+    return counter
+
+def is_general_overlap(val1, val2):
+    start1 = val1[0]
+    end1 = val1[1]
+    start2 = val2[0]
+    end2 = val2[1]
+
+    return start1 <= start2 and end1 >= start2 or start2 <= start1 and end2 >= start1
+
+def is_full_overlap(val1, val2):
     start1 = val1[0]
     end1 = val1[1]
     start2 = val2[0]
@@ -43,3 +64,4 @@ def compare_sets(l1, l2):
 
 if __name__ == "__main__":
     print(find_fully_contained())
+    print(find_overlap())
