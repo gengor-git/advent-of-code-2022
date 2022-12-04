@@ -48,3 +48,21 @@ for a in data: g1 = a.split(",")[0].split("-") g2 = a.split(",")[1].split("-") s
 
 print(total) print(total2)
 ```
+
+
+[ok531441](https://www.reddit.com/r/adventofcode/comments/zc0zta/comment/iyuuke6/?utm_source=share&utm_medium=web2x&context=3)
+
+```Python
+with open("input.txt") as f:
+    pairs = [line.strip().split(",") for line in f.readlines()]
+
+p1, p2 = 0, 0
+for e1, e2 in pairs:
+    e1, e2 = [int(i) for i in e1.split("-")], [int(i) for i in e2.split("-")]
+    if e1[0] >= e2[0] and e1[1] <= e2[1] or (e2[0] >= e1[0] and e2[1] <= e1[1]):
+        p1 += 1
+    if e1[1] >= e2[0] and e1[0] <= e2[1] or (e2[1] >= e1[0] and e2[1] <= e1[1]):
+        p2 += 1
+
+print(p1, p2)
+```
