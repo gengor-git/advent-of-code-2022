@@ -55,8 +55,10 @@ priorities = {
     'Z': 52
 }
 
+
 def get_prio_by_letter(x):
     return priorities[x]
+
 
 def find_double_items():
     with open('./day03/input.txt') as rucksacks:
@@ -70,19 +72,22 @@ def find_double_items():
             compartment2 = rucksack[int(rucksack_size/2):rucksack_size]
             if len(compartment1) != len(compartment2):
                 print("ERROR")
-                break;
+                break
             dublicate = set(compartment1) & set(compartment2)
             priority_values += get_prio_by_letter(dublicate.pop())
-        print(priority_values)
+        return priority_values
+
 
 def find_badges():
     with open("./day03/input.txt") as input:
         data_raw = [x for x in input.read().splitlines()]
         data = list(zip(*(iter(data_raw),) * 3))
-        result = sum(get_prio_by_letter((set(group[0]) & set(group[1]) & set(group[2])).pop()) for group in data)
+        result = sum(get_prio_by_letter((set(group[0]) & set(
+            group[1]) & set(group[2])).pop()) for group in data)
 
-        print(result)
+        return result
+
 
 if __name__ == "__main__":
-    find_double_items()
-    #find_badges()
+    print("Part 1: priority values = {}".format(find_double_items()))
+    print("Part 2: badges = {}".format(find_badges()))
