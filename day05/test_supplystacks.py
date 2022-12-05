@@ -20,6 +20,8 @@ class TestSupplyStacks(unittest.TestCase):
             "[P]     [L]         [T]            "), "P # L # # T # # #")
         self.assertEqual(day5.clean(
             "[M]     [Q] [W]     [H] [R] [G]    "), "M # Q W # H R G #")
+        self.assertEqual(day5.clean(
+            "[B] [Q] [D] [T] [T] [B] [N] [L] [D]"), "B Q D T T B N L D")
 
 
 if __name__ == '__main__':
