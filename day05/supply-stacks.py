@@ -19,6 +19,7 @@ data = open(input_file).read().split("\n")
 stack_strings = data[0:9]
 moves = data[10:-1]
 
+
 def build_stacks() -> list:
     stack1 = LifoQueue()
     stack2 = LifoQueue()
@@ -32,8 +33,8 @@ def build_stacks() -> list:
 
     all_stacks = [stack1, stack2, stack3, stack4, stack5, stack6, stack7, stack8, stack9]
 
-# going through the stacks bottom to top
-# bottom is higher numbers, top is 0
+    # going through the stacks bottom to top
+    # bottom is higher numbers, top is 0
     for layer in range(7, -1, -1):
         layer_data = clean(str(stack_strings[layer])).split(" ")
         if len(layer_data) > 9:
@@ -50,6 +51,7 @@ def build_stacks() -> list:
         print("Stack No. {} has {} elements.".format(i+1, all_stacks[i].qsize()))
 
     return all_stacks
+
 
 def part1():
     result = ""
