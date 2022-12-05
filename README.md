@@ -4,11 +4,23 @@ https://adventofcode.com/2022
 
 ## Day 1
 
-- [Python version](day01/calorie-counting.py)
+- [Python version](day01/caloriecounting.py)
 - [PowerShell version](day01/Get-CaloriesFromElvesBackpack.ps1)
 
 
 ## Day 2
 
-- [Python version](day02/rock-paper-scissors.py)
+- [Python version](day02/rockpaperscissors.py)
 - [PowerShell version](day02/New-RockPaperScissorsGame.ps1)
+
+## Day 3
+
+- [Python version](day03/rucksackreoganization.py)
+
+## Day 4
+
+- [Python version](day04/cleanupassignments.py)
+
+## Day 5
+
+- [Python version](day05/supplystacks.py)
