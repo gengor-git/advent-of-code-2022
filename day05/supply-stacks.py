@@ -60,7 +60,7 @@ def part1():
         source_stack = int(x[3])-1
         target_stack = int(x[5])-1
         print("Moving '{}' crates from '{}' to '{}'.".format(amount,source_stack+1, target_stack+1))
-        for y in range(amount):
+        for _ in range(amount):
             all_stacks[target_stack].put(all_stacks[source_stack].get())
 
     for i in range(0,9):
@@ -118,10 +118,10 @@ def part2() -> str:
         target_stack = int(x[5])-1
         tmp_stack = LifoQueue(maxsize=amount)
         print("Moving '{}' crates from '{}' to '{}'.".format(amount,source_stack+1, target_stack+1))
-        for y in range(amount):
+        for _ in range(amount):
             tmp_stack.put(all_stacks[source_stack].get())
 
-        for y in range(tmp_stack.qsize()):
+        for _ in range(tmp_stack.qsize()):
             all_stacks[target_stack].put(tmp_stack.get())
 
     for i in range(0,9):
