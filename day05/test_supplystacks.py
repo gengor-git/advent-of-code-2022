@@ -16,9 +16,10 @@ class TestSupplyStacks(unittest.TestCase):
         self.assertEqual(result, expected)
 
     def testClean(self):
-        source = "[P]     [L]         [T]            "
-        expected = "P # L # # T # # #"
-        result = day5.clean(source)
+        self.assertEqual(day5.clean(
+            "[P]     [L]         [T]            "), "P # L # # T # # #")
+        self.assertEqual(day5.clean(
+            "[M]     [Q] [W]     [H] [R] [G]    "), "M # Q W # H R G #")
 
 
 if __name__ == '__main__':
