@@ -1,7 +1,7 @@
 from queue import LifoQueue
 import re
 
-def clean(source : str):
+def clean(source : str) -> str:
     #[\[\]]|[ ]{4}
     return_value = re.sub(r"[\[\]]", "", source)
     return_value = re.sub(r"[\ ]{12}", " # # #", return_value)
@@ -53,7 +53,7 @@ def build_stacks() -> list:
     return all_stacks
 
 
-def part1():
+def part1() -> str:
     result = ""
     all_stacks = build_stacks()
 
