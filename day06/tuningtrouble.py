@@ -25,9 +25,8 @@ def find_marker(datastream: str, marker_length: int) -> int:
 
 
 if __name__ == "__main__":
-    # input = "mjqjpqmgbljsphdztnvjfqwrcgsmlb"
     input = open("day06/input.txt").read()
     result_marker_4 = find_marker(input, 4)
     result_marker_14 = find_marker(input, 14)
     print("Part 1 result: {}".format(result_marker_4))
-    print("Part 2 result: {}".format(result_marker_14))  # 23?
+    print("Part 2 result: {}".format(result_marker_14))
