@@ -1,4 +1,4 @@
-$input = Get-Content -Path .\day06\input.txt
+$input_file = Get-Content -Path .\day06\input.txt
 
 function isUnique($datastream) {
     # Out-Host -InputObject "Datastream: $datastream"
@@ -20,8 +20,8 @@ function isUnique($datastream) {
 }
 
 
-for ($i = 3; $i -lt $input.Length; $i++) {
-    $chunk = $input.substring($i - 3, 4)
+for ($i = 3; $i -lt $input_file.Length; $i++) {
+    $chunk = $input_file.substring($i - 3, 4)
     # Out-Host -InputObject "$i : $chunk"
     if (isUnique($chunk)) {
         $Result = $i + 1
@@ -29,8 +29,8 @@ for ($i = 3; $i -lt $input.Length; $i++) {
         break
     }
 }
-for ($i = 13; $i -lt $input.Length; $i++) {
-    $chunk = $input.substring($i - 13, 14)
+for ($i = 13; $i -lt $input_file.Length; $i++) {
+    $chunk = $input_file.substring($i - 13, 14)
     # Out-Host -InputObject "$i : $chunk"
     if (isUnique($chunk)) {
         $Result = $i + 1
