@@ -40,7 +40,7 @@ def part2(datastream: str) -> int:
 if __name__ == "__main__":
     # input = "mjqjpqmgbljsphdztnvjfqwrcgsmlb"
     input = open("day06/input.txt").read()
-    # result1 = part1(input)
+    result1 = part1(input)
     result2 = part2(input)
-    # print("Part 1 result: {}".format(result1))
+    print("Part 1 result: {}".format(result1))
     print("Part 2 result: {}".format(result2))  # 23?
