@@ -5,7 +5,7 @@ def is_last_unique(datastream) -> bool:
     print("Looking for '{}' in '{}' from '{}'".format(val, compare, datastream))
 
     if val not in compare:
-        if len(datastream) >= 2:
+        if len(datastream) >= 3:
             print("Checking rest of string '{}'.".format(compare))
             return is_last_unique(compare)
         else:
