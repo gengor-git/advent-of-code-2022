@@ -1,5 +1,10 @@
 # Day 3: Rucksack Reorganization
 
+## Results
+
+- Part 1: 7553
+- Part 2: 2758
+
 ## Other Solutions
 
 - https://www.reddit.com/r/adventofcode/comments/zb865p/comment/iyqdx7e/?utm_source=share&utm_medium=web2x&context=3

@@ -1,5 +1,11 @@
 # Day 1: Calorie Counting
 
+## Results
+
+- We've got 254 elves.
+- Maximum calories with one elf are: 75622
+- Calories with the top 3 are: 213159
+
 ## Other Examples via Reddit
 
 [Dryctas](https://www.reddit.com/r/adventofcode/comments/z9ezjb/comment/iyhb9y8/?utm_source=share&utm_medium=web2x&context=3)

@@ -1,5 +1,10 @@
 # Day 2: Rock Paper Scissors
 
+## Results
+
+- Part 1: 12586
+- Part 2: 13193
+
 ## The rules Part 1
 
 *other*
