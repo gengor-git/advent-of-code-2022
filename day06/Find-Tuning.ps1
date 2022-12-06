@@ -1,13 +1,13 @@
 $input_file = Get-Content -Path .\day06\input.txt
 
-function isUnique($datastream) {
-    # Out-Host -InputObject "Datastream: $datastream"
-    $val = $datastream[-1]
-    $compare = $datastream.substring(0, $datastream.Length - 1)
-    # Out-Host -InputObject "Searching for `"$val`" in `"$compare`""
-    if (-not ($compare.contains($val))) {
-        if ($datastream.Length -ge 3) {
-            return isUnique($compare)
+function isUnique($DataStream) {
+    # Out-Host -InputObject "Datastream: $DataStream"
+    $LastLetter = $DataStream[-1]
+    $RestOfString = $DataStream.substring(0, $DataStream.Length - 1)
+    # Out-Host -InputObject "Searching for `"$LastLetter`" in `"$RestOfString`""
+    if (-not ($RestOfString.contains($LastLetter))) {
+        if ($DataStream.Length -ge 3) {
+            return isUnique($RestOfString)
         }
         else {
             return $true
@@ -19,13 +19,13 @@ function isUnique($datastream) {
     return $false
 }
 
-function Find-Marker($datastream, $markerSize) {
+function Find-Marker($DataStream, $MarkerSIze) {
     $Result = 0
-    # Out-Host -InputObject "Marker size: $markerSize"
-    $markerSizeS = $markerSize - 1
+    # Out-Host -InputObject "Marker size: $MarkerSIze"
+    $MarkerSIzeS = $MarkerSIze - 1
 
-    for ($i = $markerSizeS; $i -lt $input_file.Length; $i++) {
-        $chunk = $input_file.substring($i - $markerSizeS, $markerSize)
+    for ($i = $MarkerSIzeS; $i -lt $input_file.Length; $i++) {
+        $chunk = $input_file.substring($i - $MarkerSIzeS, $MarkerSIze)
         # Out-Host -InputObject "$i : $chunk"
         if (isUnique($chunk)) {
             $Result = $i + 1
@@ -36,8 +36,8 @@ function Find-Marker($datastream, $markerSize) {
     return $Result
 }
 
-$part1 = Find-Marker -datastream $datastream -markerSize 4
-$part2 = Find-Marker -datastream $datastream -markerSize 14
+$part1 = Find-Marker -DataStream $DataStream -MarkerSize 4
+$part2 = Find-Marker -DataStream $DataStream -MarkerSize 14
 
 Out-Host -InputObject "Result Part 1: $part1"
 Out-Host -InputObject "Result Part 2: $part2"
