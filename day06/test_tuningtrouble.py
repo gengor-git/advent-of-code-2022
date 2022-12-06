@@ -12,8 +12,8 @@ class TestTuningTrouble(unittest.TestCase):
             "nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg", 4), 10)
         self.assertEqual(day6.find_marker(
             "zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", 4), 11)
-        input = open("./day06/input.txt").read()
-        self.assertEqual(day6.find_marker(input, 4), 1235)
+        input_file = open("./day06/input.txt").read()
+        self.assertEqual(day6.find_marker(input_file, 4), 1235)
 
     def testFindMarkerPart2(self):
         self.assertEqual(day6.find_marker(
@@ -26,5 +26,5 @@ class TestTuningTrouble(unittest.TestCase):
             "nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg", 14), 29)
         self.assertEqual(day6.find_marker(
             "zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", 14), 26)
-        input = open("./day06/input.txt").read()
-        self.assertEqual(day6.find_marker(input, 14), 3051)
+        input_file = open("./day06/input.txt").read()
+        self.assertEqual(day6.find_marker(input_file, 14), 3051)

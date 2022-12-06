@@ -11,7 +11,7 @@ def is_last_unique(datastream) -> bool:
         else:
             return True
     else:
-        False
+        return False
 
 
 def find_marker(datastream: str, marker_length: int) -> int:
