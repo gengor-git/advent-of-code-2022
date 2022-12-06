@@ -14,22 +14,12 @@ def isLastUnique(datastream) -> bool:
         False
 
 
-def part1(datastream: str) -> int:
+def find_marker(datastream: str, marker_length: int) -> int:
     print("Datastream is '{}'.".format(datastream))
     result = 0
-    for i in range(4, len(datastream)):
+    for i in range(marker_length, len(datastream)):
         print("{} is {}".format(i, datastream[i-1]))
-        if isLastUnique(datastream[i-4:i]):
-            return i
-    return result
-
-
-def part2(datastream: str) -> int:
-    print("Datastream is '{}'.".format(datastream))
-    result = 0
-    for i in range(14, len(datastream)):
-        print("{} is {}".format(i, datastream[i-1]))
-        if isLastUnique(datastream[i-14:i]):
+        if isLastUnique(datastream[i-marker_length:i]):
             return i
     return result
 
@@ -37,7 +27,7 @@ def part2(datastream: str) -> int:
 if __name__ == "__main__":
     # input = "mjqjpqmgbljsphdztnvjfqwrcgsmlb"
     input = open("day06/input.txt").read()
-    result1 = part1(input)
-    result2 = part2(input)
-    print("Part 1 result: {}".format(result1))
-    print("Part 2 result: {}".format(result2))  # 23?
+    result_marker_4 = find_marker(input, 4)
+    result_marker_14 = find_marker(input, 14)
+    print("Part 1 result: {}".format(result_marker_4))
+    print("Part 2 result: {}".format(result_marker_14))  # 23?
