@@ -8,3 +8,5 @@ class TestTuningTrouble(unittest.TestCase):
         self.assertEqual(day6.part1("nppdvjthqldpwncqszvftbrmjlhg"), 6)
         self.assertEqual(day6.part1("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg"), 10)
         self.assertEqual(day6.part1("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw"), 11)
+        input = open("./day06/input.txt").read()
+        self.assertEqual(day6.part1(input), 1235)
