@@ -28,4 +28,4 @@ https://adventofcode.com/2022
 ## Day 6
 
 - [Python version](day06/tuningtrouble.py)
-- [PowerShell version](day06/Get-Tuning.ps1)
+- [PowerShell version](day06/Find-Tuning.ps1)
