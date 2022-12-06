@@ -17,23 +17,20 @@ def isLastUnique(datastream) -> bool:
 def part1(datastream: str) -> int:
     print("Datastream is '{}'.".format(datastream))
     result = 0
-    for i in range(3, len(datastream)):
-        print("{} is {}".format(i+1, datastream[i]))
-        pre3 = datastream[i-3:i]
-        pre2 = datastream[i-3:i-1]
-        print("Checking against '{}'.".format(pre3))
-        if datastream[i] not in pre3 and datastream[i-1] not in pre2 and datastream[i-2] != datastream[i-3]:
-            return i+1
+    for i in range(4, len(datastream)):
+        print("{} is {}".format(i, datastream[i-1]))
+        if isLastUnique(datastream[i-4:i]):
+            return i
     return result
 
 
 def part2(datastream: str) -> int:
     print("Datastream is '{}'.".format(datastream))
     result = 0
-    for i in range(13, len(datastream)):
-        print("{} is {}".format(i+1, datastream[i]))
-        if isLastUnique(datastream[i-13:i+1]):
-            return i+1
+    for i in range(14, len(datastream)):
+        print("{} is {}".format(i, datastream[i-1]))
+        if isLastUnique(datastream[i-14:i]):
+            return i
     return result
 
 
