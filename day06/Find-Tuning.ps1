@@ -32,7 +32,6 @@ function Find-Marker($DataStream, $MarkerSIze) {
             break
         }
     }
-
     return $Result
 }
 
