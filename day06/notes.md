@@ -1,4 +1,4 @@
-# Notes day 04 // Tuning Trouble
+# Day 6: Tuning Trouble
 
 - 4 characters
 - all different

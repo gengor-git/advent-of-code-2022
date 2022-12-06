@@ -1,3 +1,4 @@
+# Day 4: Camp Cleanup
 ## Other Examples
 
 [FormalPlatypus1231](https://www.reddit.com/r/adventofcode/comments/zc0zta/comment/iyurl2s/?utm_source=share&utm_medium=web2x&context=3)

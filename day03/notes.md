@@ -1,4 +1,4 @@
-# Day 03
+# Day 3: Rucksack Reorganization
 
 ## Other Solutions
 
