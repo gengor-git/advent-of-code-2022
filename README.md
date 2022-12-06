@@ -15,7 +15,7 @@ https://adventofcode.com/2022
 
 ## Day 3
 
-- [Python version](day03/rucksackreoganization.py)
+- [Python version](day03/rucksackreorganization.py)
 
 ## Day 4
 
@@ -24,3 +24,7 @@ https://adventofcode.com/2022
 ## Day 5
 
 - [Python version](day05/supplystacks.py)
+
+## Day 6
+
+- [Python version](day06/tuningtrouble.py)
