@@ -19,22 +19,25 @@ function isUnique($datastream) {
     return $false
 }
 
+function Find-Marker($datastream, $markerSize) {
+    $Result = 0
+    # Out-Host -InputObject "Marker size: $markerSize"
+    $markerSizeS = $markerSize - 1
 
-for ($i = 3; $i -lt $input_file.Length; $i++) {
-    $chunk = $input_file.substring($i - 3, 4)
-    # Out-Host -InputObject "$i : $chunk"
-    if (isUnique($chunk)) {
-        $Result = $i + 1
-        Out-Host -InputObject "Result Part 1: $Result"
-        break
+    for ($i = $markerSizeS; $i -lt $input_file.Length; $i++) {
+        $chunk = $input_file.substring($i - $markerSizeS, $markerSize)
+        # Out-Host -InputObject "$i : $chunk"
+        if (isUnique($chunk)) {
+            $Result = $i + 1
+            break
+        }
     }
+
+    return $Result
 }
-for ($i = 13; $i -lt $input_file.Length; $i++) {
-    $chunk = $input_file.substring($i - 13, 14)
-    # Out-Host -InputObject "$i : $chunk"
-    if (isUnique($chunk)) {
-        $Result = $i + 1
-        Out-Host -InputObject "Result Part 2: $Result"
-        break
-    }
-}
+
+$part1 = Find-Marker -datastream $datastream -markerSize 4
+$part2 = Find-Marker -datastream $datastream -markerSize 14
+
+Out-Host -InputObject "Result Part 1: $part1"
+Out-Host -InputObject "Result Part 2: $part2"
