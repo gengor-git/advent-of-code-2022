@@ -1,5 +1,5 @@
 
-def isLastUnique(datastream) -> bool:
+def is_last_unique(datastream) -> bool:
     val = datastream[-1]
     compare = datastream[0:-1]
     print("Looking for '{}' in '{}' from '{}'".format(val, compare, datastream))
@@ -7,7 +7,7 @@ def isLastUnique(datastream) -> bool:
     if val not in compare:
         if len(datastream) >= 2:
             print("Checking rest of string '{}'.".format(compare))
-            return isLastUnique(compare)
+            return is_last_unique(compare)
         else:
             return True
     else:
@@ -19,7 +19,7 @@ def find_marker(datastream: str, marker_length: int) -> int:
     result = 0
     for i in range(marker_length, len(datastream)):
         print("{} is {}".format(i, datastream[i-1]))
-        if isLastUnique(datastream[i-marker_length:i]):
+        if is_last_unique(datastream[i-marker_length:i]):
             return i
     return result
 
