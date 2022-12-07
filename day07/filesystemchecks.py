@@ -4,81 +4,63 @@ input_file = "./day07/input.txt"
 test_input_file = "./day07/test_input.txt"
 
 
-class FileNode:
-    def __init__(self, name, parent="None", size=0, is_dir=False) -> None:
-        self.name = name
-        self.parent = parent
-        self.files = []
-        self.directories = []
-        self.size = size
-        self.is_dir = is_dir
-        self.part1 = 0
-
-    def add_child(self, child):
-        if child.is_dir:
-            self.directories.append(child)
-        else:
-            self.files.append(child)
-        self.size += child.size
-        print("Increase size by '{}' to '{}' for '{}' with child '{}'".format(
-            child.size, self.size, self.name, child.name))
-
-
-def read_drive(data: list) -> FileNode:
-    root = None
-    current_dir = None
-    current_parent = None
-    for line in data:
-        if line == "$ cd /":
-            print("We are at root.")
-            root = FileNode("/", None, 0, True)
-            current_dir = root
-        elif line == "$ ls":
-            pass
-        elif line.startswith("$ cd"):
-            if line.endswith(".."):
-                print("Move UP from {} to {}.".format(
-                    current_dir.name, current_parent.name))
-                if current_dir.size <= 100000:
-                    root.part1 += current_dir.size
-                current_parent.add_child(current_dir)
-                current_dir = current_parent
-                if current_parent == root:
-                    current_parent = None
+def create_directory_dict(data: list):
+    directories, index = [{}], 0
+    while index < len(data):
+        command = data[index].split()
+        if command[1] == "cd" and command[2] == "..":
+            print("Go UP one directory")
+            directories.pop()
+        elif command[1] == "cd":
+            target_dir = command[2]
+            print("Go INTO one directory: '{}'".format(target_dir))
+            if target_dir not in directories[-1]:
+                directories[-1][target_dir] = {}
+            # this linking is required for the pop above to work
+            directories.append(directories[-1][target_dir])
+        elif command[1] == "ls":
+            print("Reading dir '{}'".format(data[index-1].split()[2]))
+            while index + 1 < len(data) and data[index + 1][0] != "$":
+                size, name = data[index + 1].split()
+                print("Item: {}, {}".format(name, size))
+                if size != "dir":
+                    directories[-1][name] = int(size)
                 else:
-                    current_parent = current_parent.parent
-                # print("DEBUG {}".format(line))
-                # print("Moving up to {}".format(current_dir.name))
+                    directories[-1][name] = {}
+                index += 1
+        else:
+            print("===========> REST {}".format(command))
+        index += 1
+    return directories[0]
+
+
+def calculate_sizes(directories):
+    all_dirs = []
+
+    def _size_per_directory(directory):
+        size = 0
+        for _, data in directory.items():
+            if type(data) is dict:
+                size += _size_per_directory(data)
             else:
-                # new dir
-                _, _, name = line.split()
-                go_to_dir = FileNode(name, parent=current_dir, is_dir=True)
-                print("Move DOWN from '{}' into '{}'".format(
-                    current_dir.name, go_to_dir.name))
-                current_parent = current_dir
-                current_dir = go_to_dir
-        elif re.findall(r"^([0-9]*) ([a-z.]*)$", line):
-            # print(line)
-            size, name = line.split()
-            this_file = FileNode(name, parent=current_dir,
-                                 size=int(size), is_dir=False)
-            current_dir.add_child(this_file)
-        elif re.findall(r"dir [\w]*", line):
-            print("'{}' is just a dir.".format(line))
-
-    print("Finishing up.")
-    current_parent.add_child(current_dir)
-    if current_dir.size <= 100000:
-        root.part1 += current_dir.size
-    if current_parent != root:
-        root.add_child(current_parent)
-        if current_parent.size <= 100000:
-            root.part1 += current_parent.size
-
-    return root
+                size += int(data)
+        # this ensures each dir is listed separately.
+        all_dirs.append(size)
+        return size
+    _size_per_directory(directories)
+    return all_dirs
 
 
 if __name__ == "__main__":
     data = open(input_file).read().strip().splitlines()
-    resultPart1 = read_drive(data).part1
-    print("Result part 1: {}".format(resultPart1))
+    root = create_directory_dict(data)
+    sizes = sorted(calculate_sizes(root))
+    part2 = 0
+    storage = 70000000
+    free_needed = 30000000
+    current_used = sizes[-1]
+    for directory in sizes:
+        if storage - current_used + directory >= free_needed:
+            part2 = directory
+            break
+    print(part2)
