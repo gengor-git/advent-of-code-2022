@@ -29,3 +29,11 @@ https://adventofcode.com/2022
 
 - [Python version](day06/tuningtrouble.py)
 - [PowerShell version](day06/Find-Tuning.ps1)
+
+## Day 7
+ 
+- [Python version](day07/filesystemchecks.py)
+
+## Day 8
+
+- [Python version](day08/treetopscanner.py)
