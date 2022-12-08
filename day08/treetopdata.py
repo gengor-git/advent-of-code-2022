@@ -14,6 +14,7 @@ data_raw = open(input_file).read().strip().splitlines()
 ert = [list(map(int, line)) for line in data_raw]
 data = pd.DataFrame(ert)
 plt.figure(figsize=(12, 12))
-heat_map = sns.heatmap(data, linewidth=0, annot=False)
+my_cmap = sns.color_palette("viridis", as_cmap=True)
+heat_map = sns.heatmap(data, linewidth=0, annot=False, cmap=my_cmap)
 heat_map.figure.savefig('./day08/heatmap.svg', transparent=True)
 heat_map.figure.savefig('./day08/heatmap.png', transparent=True)
