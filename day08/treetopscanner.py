@@ -8,6 +8,7 @@ def scan_tress(mapdata: list):
     height = len(mapdata)
     print("Grid is {}x{}".format(width, height))
     visible_trees = 2*width + 2*(height-2)
+    tree_views = []
     row = 1
     while row < len(mapdata)-1:
         # print("{:5d} : {}".format(row, mapdata[row]))
@@ -19,6 +20,7 @@ def scan_tress(mapdata: list):
 
             # look up and compare
             up = []
+            up_view = 0
             index = row-1
             is_visible = False
             while index >= 0 and not is_visible:
@@ -30,10 +32,18 @@ def scan_tress(mapdata: list):
                 is_visible = True
                 visible_trees += 1
 
-            # look down and compare
+            for tree in up:
+                if tree < this_tree:
+                    up_view += 1
+                elif tree >= this_tree:
+                    up_view += 1
+                    break
+
+                    # look down and compare
             down = []
+            down_view = 0
             index = row+1
-            while index <= height-1 and not is_visible:
+            while index <= height-1:
                 down.append(int(mapdata[index][col]))
                 index += 1
 
@@ -42,10 +52,18 @@ def scan_tress(mapdata: list):
                 is_visible = True
                 visible_trees += 1
 
+            for tree in down:
+                if tree < this_tree:
+                    down_view += 1
+                elif tree >= this_tree:
+                    down_view += 1
+                    break
+
             # look left
             left = []
+            left_view = 0
             index = col - 1
-            while index >= 0 and not is_visible:
+            while index >= 0:
                 left.append(int(mapdata[row][index]))
                 index -= 1
 
@@ -54,10 +72,18 @@ def scan_tress(mapdata: list):
                 is_visible = True
                 visible_trees += 1
 
+            for tree in left:
+                if tree < this_tree:
+                    left_view += 1
+                elif tree >= this_tree:
+                    left_view += 1
+                    break
+
             # look right
             right = []
+            right_view = 0
             index = col + 1
-            while index <= width - 1 and not is_visible:
+            while index <= width - 1:
                 right.append(int(mapdata[row][index]))
                 index += 1
 
@@ -66,12 +92,22 @@ def scan_tress(mapdata: list):
                 is_visible = True
                 visible_trees += 1
 
+            for tree in right:
+                if tree < this_tree:
+                    right_view += 1
+                elif tree >= this_tree:
+                    right_view += 1
+                    break
+
+            tree_views.append(up_view * down_view * right_view * left_view)
+
             col += 1
         print("{} complete".format(row+1))
         row += 1
-    return visible_trees
+    return (visible_trees, tree_views)
 
 
 if __name__ == "__main__":
-    mapdata = open(test_input_file).read().strip().splitlines()
-    print("Part 1: {}".format(scan_tress(mapdata)))
+    mapdata = open(input_file).read().strip().splitlines()
+    print("Part 1: {}".format(scan_tress(mapdata)[0]))
+    print("Part 2: {}".format(max(scan_tress(mapdata)[1])))
