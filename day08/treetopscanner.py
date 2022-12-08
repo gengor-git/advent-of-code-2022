@@ -2,7 +2,7 @@ input_file = "day08/input.txt"
 test_input_file = "day08/test_input.txt"
 
 
-def scan_tress(mapdata: list):
+def scan_tress(mapdata: list) -> tuple:
     print("+++ Scanning map +++\n{}\n+++  End of Map  +++\n".format(mapdata))
     width = len(mapdata[0])
     height = len(mapdata)
@@ -23,7 +23,7 @@ def scan_tress(mapdata: list):
             up_view = 0
             index = row-1
             is_visible = False
-            while index >= 0 and not is_visible:
+            while index >= 0:
                 up.append(int(mapdata[index][col]))
                 index -= 1
 
@@ -39,7 +39,7 @@ def scan_tress(mapdata: list):
                     up_view += 1
                     break
 
-                    # look down and compare
+            # look down and compare
             down = []
             down_view = 0
             index = row+1
