@@ -15,11 +15,13 @@ def move_through_grid(move_set: list) -> int:
     }
 
     for move, steps in move_set:
-        position_h = tuple(
-            map(lambda i, j: i + (j*steps), position_h, _moves_mapping[move]))
-        print("Moving {} by [ {:2d} ] steps to ---> x: {:3d} / y: {:3d}".format(
-            move, steps, position_h[0], position_h[1]))
-
+        print("Moving [ {} ] by [ {:2d} ] steps ...".format(move, steps))
+        while steps > 0:
+            position_h = tuple(
+                map(lambda i, j: i + j, position_h, _moves_mapping[move]))
+            print("{}»({:3d}/{:3d})".format(move,
+                  position_h[0], position_h[1]))
+            steps -= 1
     return positions_touched
 
 
