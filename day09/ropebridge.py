@@ -1,7 +1,6 @@
 
 def move_through_grid(move_set: list) -> int:
-    positions_touched = 0
-    position_h, position_t = (0, 0), (0, 0)
+    loc_head, loc_tail = (0, 0), (0, 0)
     trail = {(0, 0)}
 
     _moves_mapping = {
@@ -11,49 +10,54 @@ def move_through_grid(move_set: list) -> int:
         "D": (0, 1)
     }
 
+    def _move_by_cords(coords: tuple, move: str) -> tuple:
+        return tuple(map(lambda i, j: i + j, coords, _moves_mapping[move]))
+        
+    def _distance(me: tuple, other: tuple) -> tuple:
+        return other[0]-me[0], other[1]-me[1]
+
     for move, steps in move_set:
         # print("Moving [ {} ] by [ {:2d} ] steps ...".format(move, steps))
         while steps > 0:
-            position_h = tuple(
-                map(lambda i, j: i + j, position_h, _moves_mapping[move]))
+            loc_head = _move_by_cords(loc_head, move)
             # print("                   ├[ {} ]-({:4d}/{:4d})".format(move,
             #   position_h[0], position_h[1]))
 
-            # reposition the tail now
-            # xxx  (-1/-1) ( 0/-1) ( 1/-1)
-            # xHx  (-1/ 0)    H    ( 1/ 0)
-            # xxx  (-1/ 1) ( 0/ 1) ( 1/ 1)
-            distance = ((position_h[0] - position_t[0]),
-                        (position_h[1] - position_t[1]))
+            dx, dy = _distance(loc_tail, loc_head)
+            print("\nDistance: {:2d} {:2d}".format(dx, dy))
 
-            need_to_move_horizontally = distance[0] < -1 or distance[0] > 1
-            need_to_move_vertically = distance[1] < -1 or distance[1] > 1
-
-            if need_to_move_vertically or need_to_move_horizontally:
-                if position_h[0] == position_t[0]:
-                    # same column / x : just make the same move
-                    position_t = tuple(
-                        map(lambda i, j: i + j, position_t, _moves_mapping[move]))
-                elif position_h[1] == position_t[0]:
-                    # same column / y : just make the same move
-                    position_t = tuple(
-                        map(lambda i, j: i + j, position_t, _moves_mapping[move]))
+            if abs(dx) == 2 or abs(dy) == 2:
+                if dx == 0 or dy == 0:
+                    print("» Standard Movelv{:2d} {:2d}".format(dx, dy))
+                    loc_tail = _move_by_cords(loc_tail, move)
+                elif dx == 1:
+                    print("» Move right in addition {:2d} {:2d}".format(dx, dy))
+                    loc_tail = _move_by_cords(loc_tail, move)
+                    loc_tail = _move_by_cords(loc_tail, "R")
+                elif dx == -1:
+                    print("» Move left in addition {:2d} {:2d}".format(dx, dy))
+                    loc_tail = _move_by_cords(loc_tail, move)
+                    loc_tail = _move_by_cords(loc_tail, "L")
+                elif dy == 1:
+                    print("» Move down in addition {:2d} {:2d}".format(dx, dy))
+                    loc_tail = _move_by_cords(loc_tail, move)
+                    loc_tail = _move_by_cords(loc_tail, "D")
+                elif dy == -1:
+                    print("» Move up in addition {:2d} {:2d}".format(dx, dy))
+                    loc_tail = _move_by_cords(loc_tail, move)
+                    loc_tail = _move_by_cords(loc_tail, "U")
                 else:
-                    # we need to move diagonally
-                    if need_to_move_horizontally:
-                        position_t = (
-                            position_t[0]+_moves_mapping[move][0], position_h[1])
-                    elif need_to_move_vertically:
-                        position_t = (
-                            position_h[0], position_t[1]+_moves_mapping[move][1])
+                    print("ERROR")
+            else:
+                print("» No move needed for x:{} y:{}".format(dx, dy))
+
+            print("»» New coords x:{} y:{}".format(loc_tail[0], loc_tail[1]))
 
             # we make a copy of the tupble
-            trail.add(position_t+tuple())
+            trail.add(loc_tail+tuple())
 
             steps -= 1
-    # ordered = list(dict.fromkeys(trail))
-    # print("Trail size {}".format(len(trail)))
-    print("Trail size no duplicates {}".format(len(trail)))
+    # print("Trail: {}".format(trail))
     return len(trail)
 
 
@@ -64,6 +68,7 @@ def load_data(textfile) -> list:
     for direction, steps in data_raw:
         # print("Direction: {}, Steps: {}".format(direction, steps))
         move_set.append((direction, int(steps)))
+    print(len(move_set))
     return move_set
 
 
