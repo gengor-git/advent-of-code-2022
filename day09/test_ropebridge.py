@@ -12,3 +12,7 @@ class TestRopeBridge(unittest.TestCase):
     def testPart1withMyInput(self):
         self.assertEqual(day9.move_through_grid(
             day9.load_data(input_file)), 6209)
+
+    def testPart2withMyInput(self):
+        self.assertEqual(day9.move_through_grid(
+            day9.load_data(input_file), 10), 2460)
