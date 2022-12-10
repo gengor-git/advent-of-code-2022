@@ -42,10 +42,11 @@ def move_through_grid(move_set: list, knot_count=2) -> int:
             j = x
             k = y + 1 if dy > 0 else y - 1
         elif dx == 0 and dy == 0 or abs(dx) == 1 and abs(dy) == 1:
+            print("F", end="...")
             j = x
             k = y
         else:
-            print("ERROR??", end="...")
+            print("G", end="...")
             j = x
             k = y
         
