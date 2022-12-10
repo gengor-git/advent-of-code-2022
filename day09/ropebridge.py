@@ -1,6 +1,6 @@
 
 def move_through_grid(move_set: list, knot_count=2) -> int:
-    rope = [(0, 0) for _ in range(knot_count)]
+    ropes = [(0, 0) for _ in range(knot_count)]
     trail = {(0, 0)}
 
     _moves_mapping = {
@@ -10,57 +10,67 @@ def move_through_grid(move_set: list, knot_count=2) -> int:
         "D": (0, 1)
     }
 
-    def _move_by_cords(coords: tuple, move: str) -> tuple:
+    def _move_by_direction(coords: tuple, move: str) -> tuple:
         return tuple(map(lambda i, j: i + j, coords, _moves_mapping[move]))
+
+    def _move_by_pre(my_location: tuple, predecessor: tuple) -> tuple:
+        x, y = my_location
+        a, b = predecessor
+        dx, dy = _distance(my_location, predecessor)
+        j, k = 0, 0
+        # print("Move by predecessor x:{} y:{} ... a:{} b:{}".format(x, y, a, b))
+        # print("Distance: {:2d} {:2d}".format(dx, dy))
+        
+        if abs(dx) == 2 and abs(dy) == 2:
+            print("A", end="...")
+            j = x + 1 if dx > 0 else x - 1
+            k = y + 1 if dy > 0 else y - 1
+        elif abs(dx) == 2 and abs(dy) == 1:
+            print("B", end="...")
+            j = x + 1 if dx > 0 else x - 1
+            k = y + 1 if dy > 0 else y - 1
+        elif abs(dx) == 1 and abs(dy) == 2:
+            print("C", end="...")
+            j = x + 1 if dx > 0 else x - 1
+            k = y + 1 if dy > 0 else y - 1
+        elif abs(dx) == 2 and abs(dy) == 0:
+            print("D", end="...")
+            j = x + 1 if dx > 0 else x - 1
+            k = y
+        elif abs(dx) == 0 and abs(dy) == 2:
+            print("E", end="...")
+            j = x
+            k = y + 1 if dy > 0 else y - 1
+        elif dx == 0 and dy == 0 or abs(dx) == 1 and abs(dy) == 1:
+            j = x
+            k = y
+        else:
+            print("ERROR??", end="...")
+            j = x
+            k = y
+        
+        print("Old [{}] [{}] . Pre [{}][{}] . New [{}] [{}]".format(x, y, a, b, j, k))
+
+        return j, k
         
     def _distance(me: tuple, other: tuple) -> tuple:
         return other[0]-me[0], other[1]-me[1]
 
 
     for move, steps in move_set:
+        print("\n\nMovement {} by {}".format(move, steps))
         while steps > 0:
-            print("\n\nMovement {} by {}".format(move, steps))
-            print("Knot Count: {}\n".format(knot_count))
-            rope[0] = _move_by_cords(rope[0], move)
+            ropes[0] = _move_by_direction(ropes[0], move)
             for index in range(1, knot_count):
-                print("\nIndex {} : previous {} ... this one {}".format(index, rope[index], rope[index-1]))
-                dx, dy = _distance(rope[index], rope[index-1])
-                print("Distance: {:2d} {:2d}".format(dx, dy))
-
-                if abs(dx) == 2 or abs(dy) == 2:
-                    if dx == 0 or dy == 0:
-                        print("» Standard Move {:2d} {:2d}".format(dx, dy))
-                        rope[index] = _move_by_cords(rope[index], move)
-                    elif dx == 1:
-                        print("» Move right in addition {:2d} {:2d}".format(dx, dy))
-                        rope[index] = _move_by_cords(rope[index], move)
-                        rope[index] = _move_by_cords(rope[index], "R")
-                    elif dx == -1:
-                        print("» Move left in addition {:2d} {:2d}".format(dx, dy))
-                        rope[index] = _move_by_cords(rope[index], move)
-                        rope[index] = _move_by_cords(rope[index], "L")
-                    elif dy == 1:
-                        print("» Move down in addition {:2d} {:2d}".format(dx, dy))
-                        rope[index] = _move_by_cords(rope[index], move)
-                        rope[index] = _move_by_cords(rope[index], "D")
-                    elif dy == -1:
-                        print("» Move up in addition {:2d} {:2d}".format(dx, dy))
-                        rope[index] = _move_by_cords(rope[index], move)
-                        rope[index] = _move_by_cords(rope[index], "U")
-                    else:
-                        print("ERROR")
-                        print(rope)
-                else:
-                    print("» No move needed for x:{} y:{}".format(dx, dy))
-
-                print("»» New coords x:{} y:{}".format(rope[index][0], rope[index][1]))
+                ert = _move_by_pre(ropes[index], ropes[index-1])
+                ropes[index] = ert
 
             # we make a copy of the tupble
-            trail.add(rope[-1]+tuple())
+            trail.add(ropes[-1])
 
             steps -= 1
     # print("Trail: {}".format(trail))
-    print(rope)
+    print(ropes)
     return len(trail)
 
 
@@ -82,13 +92,13 @@ if __name__ == "__main__":
     move_set = load_data(test_input_file)
     # print("Raw move set list: {}".format(data_raw))
     # print("Adv move set list: {}".format(move_set))
-    # print("»»» TEST Results part 1: {} «««".format(move_through_grid(move_set, knot_count=10)))
+    print("»»» TEST Results part 1: {} «««".format(move_through_grid(move_set, knot_count=10)))
 
-    # move_set = load_data(input_file)
+    move_set = load_data(input_file)
     # print("Raw move set list: {}".format(data_raw))
     # print("Adv move set list: {}".format(move_set))
-    # print("»»» Results part 1: {} «««".format(move_through_grid(move_set)))
+    print("»»» Results part 1: {} «««".format(move_through_grid(move_set)))
 
     # print("Raw move set list: {}".format(data_raw))
     # print("Adv move set list: {}".format(move_set))
-    print("»»» Results part 2: {} «««".format(move_through_grid(move_set, knot_count=2)))
+    print("»»» Results part 2: {} «««".format(move_through_grid(move_set, knot_count=10)))
